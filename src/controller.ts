@@ -16,7 +16,9 @@ export class TaskController{
                 res.status(400).json({
                     "errorResponse" : err.message
                 }).send();
-            }    
+            }
+            var newUrl : string = "dummy";
+            res.append('Location', "localhost:3000/api/tasks/:id?" + task.id);    
             res.status(201).send();//TODO figure out header     
         });
     }
