@@ -17,17 +17,15 @@ export class Routes {
          * Get all tasks
          */
         app.route('/api/tasks').get(this.taskController.getTasks)   
-        // POST endpoint
+        
+        
+        //createTask
         .post(this.taskController.addNewTask);
 
         // get specific task
         app.route('/api/tasks/:id').get(this.taskController.getTaskWithID)
         
-        .patch((req: Request, res: Response) => {
-        // Update a contact           
-            res.status(200).send({
-                message: 'PUT request successfulll!!!!'
-            })
-        })         
+        //update task
+        .patch(this.taskController.updateTask)  
     }
 }

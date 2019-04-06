@@ -33,4 +33,13 @@ export class TaskController{
             res.json(task);
         });
     }
+
+    public updateTask (req: Request, res: Response) {           
+        Task.findOneAndUpdate({ _id: req.params.taskId }, req.body, { new: true }, (err, task) => {
+            if(err){
+                res.send(err);
+            }
+            res.json(task);
+        });
+    }
 }
