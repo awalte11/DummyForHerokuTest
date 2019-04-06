@@ -1,6 +1,8 @@
 import {Request, Response} from "express";
+import {TaskController } from "./controller";
 
-export class Routes {       
+export class Routes {  
+    public taskController: TaskController = new TaskController();     
     public routes(app): void {          
         app.route('/')
         .get((req: Request, res: Response) => {            
@@ -18,12 +20,7 @@ export class Routes {
             })
         })        
         // POST endpoint
-        .post((req: Request, res: Response) => {   
-        // Create new task         
-            res.status(200).send({
-                message: 'POST request successfulll!!!!'
-            })
-        })
+        .post(this.taskController.addNewTask);
 
         // task detail
         app.route('/api/tasks/:Id')
