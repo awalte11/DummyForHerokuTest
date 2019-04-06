@@ -32,7 +32,7 @@ export class TaskController{
                 res.send(err);
             }
             res.json(task);
-        });
+        }).select('-__v');
         
     }
     public getTaskWithID (req: Request, res: Response) {
@@ -48,15 +48,16 @@ export class TaskController{
                 }).send();
             }
             else res.json(task);
-        });
+        }).select('-__v');
     }
 
-    public updateTask (req: Request, res: Response) {           
-        Task.findOneAndUpdate({ id: req.params.taskId }, req.body, { new: true }, (err, task) => {
+    public updateTask (req: Request, res: Response) {    
+        console.log('called patch singular');          
+        Task.findByIdAndUpdate(mongoose.Types.ObjectId(req.params.id), req.body, { new: true }, (err, task) => {
             if(err){
-                res.send(err);
+                res.status(400).send(err);
             }
-            res.json(task);
+            res.status(204).send(task);
         });
     }
 }
