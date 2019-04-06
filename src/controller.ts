@@ -13,7 +13,7 @@ export class TaskController{
             if(err){
                 res.send(err);
             }    
-            res.json(task);
+            res.status(201).send();
         });
     }
 
@@ -25,6 +25,7 @@ export class TaskController{
             }
             res.json(task);
         });
+        
     }
     public getTaskWithID (req: Request, res: Response) {
         console.log('called get singular');           
