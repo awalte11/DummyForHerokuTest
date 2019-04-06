@@ -12,7 +12,7 @@ export class Routes {
         })   
         // General actions 
         
-        // GET endpoint 
+        
         /**
          * Get all tasks
          */
@@ -20,15 +20,9 @@ export class Routes {
         // POST endpoint
         .post(this.taskController.addNewTask);
 
-        // task detail
-        app.route('/api/tasks/:Id')
         // get specific task
-        .get((req: Request, res: Response) => {
-        // Get a single task detail            
-            res.status(200).send({
-                message: 'GET request successfulll!!!!'
-            })
-        })
+        app.route('/api/tasks/:id').get(this.taskController.getTaskWithID)
+        
         .patch((req: Request, res: Response) => {
         // Update a contact           
             res.status(200).send({

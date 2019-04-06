@@ -25,4 +25,12 @@ export class TaskController{
             res.json(task);
         });
     }
+    public getTaskWithID (req: Request, res: Response) {           
+        Task.findById(req.params.taskID, (err, task) => {
+            if(err){
+                res.send(err);
+            }
+            res.json(task);
+        });
+    }
 }
