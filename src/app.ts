@@ -11,7 +11,7 @@ dotenv.config();
 class App {
 
     public app: express.Application;
-    public mongoUrl: string = process.env.URL;
+    public mongoUrl: string = process.env.URL + 'homework?retryWrites=true';
 
     public routePrv: Routes = new Routes();
 

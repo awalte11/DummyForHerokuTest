@@ -17,7 +17,8 @@ export class TaskController{
         });
     }
 
-    public getTasks (req: Request, res: Response) {           
+    public getTasks (req: Request, res: Response) {    
+        console.log('called get all');          
         Task.find({}, (err, task) => {
             if(err){
                 res.send(err);
@@ -25,8 +26,9 @@ export class TaskController{
             res.json(task);
         });
     }
-    public getTaskWithID (req: Request, res: Response) {           
-        Task.findById(req.params.taskID, (err, task) => {
+    public getTaskWithID (req: Request, res: Response) {
+        console.log('called get singular');           
+        Task.findById(req.params.id, (err, task) => {
             if(err){
                 res.send(err);
             }
@@ -35,7 +37,7 @@ export class TaskController{
     }
 
     public updateTask (req: Request, res: Response) {           
-        Task.findOneAndUpdate({ _id: req.params.taskId }, req.body, { new: true }, (err, task) => {
+        Task.findOneAndUpdate({ id: req.params.taskId }, req.body, { new: true }, (err, task) => {
             if(err){
                 res.send(err);
             }

@@ -12,6 +12,11 @@ export class Routes {
         })   
         // General actions 
         
+        // get specific task
+        app.route('/api/tasks/:id').get(this.taskController.getTaskWithID)
+
+        //update task
+        .patch(this.taskController.updateTask);  
         
         /**
          * Get all tasks
@@ -22,10 +27,6 @@ export class Routes {
         //createTask
         .post(this.taskController.addNewTask);
 
-        // get specific task
-        app.route('/api/tasks/:id').get(this.taskController.getTaskWithID)
-        
-        //update task
-        .patch(this.taskController.updateTask)  
+
     }
 }
