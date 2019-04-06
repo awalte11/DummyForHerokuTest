@@ -11,9 +11,12 @@ export class TaskController{
     
         newTask.save((err, task) => {
             if(err){
-                res.send(err);
+                
+                res.status(400).json({
+                    "errorResponse" : err.message
+                }).send();
             }    
-            res.status(201).send();
+            res.status(201).send(); 
         });
     }
 

@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 export const TaskSchema = new Schema({
     description: {
         type: String,
-        required: 'Describe the task'
+        required: 'The task must have a description'
     },
     isComplete: {
         type: Boolean,
