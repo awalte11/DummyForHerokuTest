@@ -11,14 +11,12 @@ export class Routes {
             })
         })   
         // General actions 
-        app.route('/api/tasks') 
+        
         // GET endpoint 
-        .get((req: Request, res: Response) => {
-        // Get all tasks            
-            res.status(200).send({
-                message: 'GET request successfulll!!!!'
-            })
-        })        
+        /**
+         * Get all tasks
+         */
+        app.route('/api/tasks').get(this.taskController.getTasks)   
         // POST endpoint
         .post(this.taskController.addNewTask);
 
