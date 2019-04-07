@@ -18,15 +18,18 @@ export class TaskController{
                 "errorType" : "Description must not be null or empty."
             })
         }
-        let newTask = new Task();
-        newTask.description = req.body.description;
-    
-        newTask.save((err, task) => {
-            
-            //Slaps the location to get the thing onto the header
-            res.append('Location', "localhost:3000/api/tasks/" + task.id);    
-            res.status(201).send();    
-        });
+        else //stops passing bad desc
+        {
+            let newTask = new Task();
+            newTask.description = req.body.description;//makes sure *only* the description is passed in..
+        
+            newTask.save((err, task) => {
+                
+                //Slaps the location to get the thing onto the header
+                res.append('Location', "localhost:3000/api/tasks/" + task.id);    
+                res.status(201).send();    
+            });
+        }
     }
 
     //Gets tasks from the database
@@ -43,7 +46,7 @@ export class TaskController{
                   
         Task.findById(mongoose.Types.ObjectId(req.params.id), (err, task) => {
 
-            if (!task)//the server doesn't return err here so I detect the missing task and handle the 404
+            if (!task)//catch invalid id
             {
                 res.status(404).json({
                     "errorType" : "No task with ID " + req.params.id + " exists"
