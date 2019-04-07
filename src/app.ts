@@ -11,10 +11,11 @@ dotenv.config();
 class App {
 
     public app: express.Application;
-    public mongoUrl: string = process.env.URL + 'homework?retryWrites=true';
+    public mongoUrl: string = process.env.URL + 'homework?retryWrites=true';//causes it to look to the proper databse on a mongo setup
 
     public routePrv: Routes = new Routes();
 
+    //The below just build things
     constructor() {
         this.app = express();
         this.config();
@@ -23,9 +24,7 @@ class App {
     }
 
     private config(): void{
-        // support application/json type post data
         this.app.use(bodyParser.json());
-        //support application/x-www-form-urlencoded post data
         this.app.use(bodyParser.urlencoded({ extended: true }));
     }
 
