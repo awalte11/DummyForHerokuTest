@@ -15,7 +15,9 @@ export class TaskController{
         if(!req.body.description || req.body.description == "" )// doing this here to catch empty descriptions
         {
             res.status(400).json({
-                "errorType" : "Description must not be null or empty."
+                "paramaterName" : "description",
+                "paramaterValue" : null,
+                "errorText" : "Description must not be null or empty."
             })
         }
         else //stops passing bad desc
@@ -50,7 +52,9 @@ export class TaskController{
             if (!task)//catch invalid id
             {
                 res.status(404).json({
-                    "errorType" : "No task with ID " + req.params.id + " exists"
+                    "paramaterName" : "id",
+                    "paramaterValue" : req.params.id,   
+                    "errorText" : "No task for this id."
                 }).send();
             }
             else res.json(task);
@@ -63,12 +67,16 @@ export class TaskController{
        if(req.body.description == "" || req.body.description == null)// catch empty descriptions
         {
             res.status(400).json({
-                "errorType" : "Description must not be null or empty."
+                "paramaterName" : "description",
+                "paramaterValue" : null,
+                "errorText" : "Description must not be null or empty."
             }).send();
         }
         else if (req.body.isComplete == null) { //catch null is-complete
             res.status(400).json({
-                "errorType" : "isComplete must not be null."
+                "paramaterName" : "isComplete",
+                "paramaterValue" : req.body.isComplete,  
+                "errorText" : "IsComplete must not be null."
             }).send();
         }
         else
@@ -81,7 +89,9 @@ export class TaskController{
                 if (!task)
                 {
                     res.status(404).json({
-                        "errorType" : "No task with ID " + req.params.id + " exists"
+                        "paramaterName" : "id",
+                        "paramaterValue" : req.params.id,   
+                        "errorText" : "No task for this id."
                     }).send();
                 }
                 else res.status(204).send();
