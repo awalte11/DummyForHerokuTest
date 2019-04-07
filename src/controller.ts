@@ -9,7 +9,7 @@ export class TaskController{
     /**
      * Sends request for new task
     */
-        public addNewTask (req: Request, res: Response) {                
+    public addNewTask (req: Request, res: Response) {                
         
 
         if(!req.body.description || req.body.description == "" )// doing this here to catch empty descriptions
@@ -43,7 +43,8 @@ export class TaskController{
 
     //gets one task from the db
     public getTaskWithID (req: Request, res: Response) {
-                  
+         
+        
         Task.findById(mongoose.Types.ObjectId(req.params.id), (err, task) => {
 
             if (!task)//catch invalid id
@@ -77,7 +78,13 @@ export class TaskController{
                 req.body.dateCompleted = Date.now();
             }
             Task.findByIdAndUpdate(mongoose.Types.ObjectId(req.params.id), req.body, { new: true }, (err, task) => {
-                res.status(204).send();
+                if (!task)
+                {
+                    res.status(404).json({
+                        "errorType" : "No task with ID " + req.params.id + " exists"
+                    }).send();
+                }
+                else res.status(204).send();
             });
         }   
     }
